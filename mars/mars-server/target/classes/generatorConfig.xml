@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<context id="Oracle_FPS_Tables" targetRuntime="MyBatis3">
+		<jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:xe" userId="mars"
+			password="mars">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.comstar.mars.entity"
+			targetProject="../mars-common/src/main/java">
+			<property name="enableSubPackages" value="false" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="mybatis"
+			targetProject="../mars-server/src/main/resources">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type='XMLMAPPER'
+			targetPackage="com.comstar.mars.repository" targetProject="../mars-server/src/main/java">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		
+		<table tableName="MY_TABLE" domainObjectName="MyTable">
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="MY_TABLE_ID"
+                sqlStatement="SELECT SEQ_MY_TABLE.NEXTVAL FROM DUAL" />
+        </table>
+
+        <!-- 
+        
+        <table tableName="PORTFOLIO" domainObjectName="Portfolio">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="PORTFOLIO_SERIAL"
+				sqlStatement="SELECT SEQ_PORTFOLIO.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table tableName="FINANCIAL_PRODUCT" domainObjectName="FinancialProduct">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="FINANCIAL_PRODUCT_ID"
+				sqlStatement="SELECT SEQ_FINANCIAL_PRODUCT.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table tableName="FINANCIAL_PRODUCT_CASHFLOW" domainObjectName="FinancialProductCashflow">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="FINANCIAL_PRODUCT_CASHFLOW_ID"
+				sqlStatement="SELECT SEQ_FINANCIAL_PRODUCT_CASHFLOW.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table tableName="DEAL_SECURITY" domainObjectName="DealSecurity">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="DEAL_SECURITY_ID"
+				sqlStatement="SELECT SEQ_DEAL_SECURITY.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table tableName="DEAL_SECURITY_RECEIVABLE" domainObjectName="DealSecurityReceivable">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="DEAL_SECURITY_RECEIVABLE_ID"
+				sqlStatement="SELECT SEQ_DEAL_SECURITY_RECEIVABLE.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table tableName="DEAL_SECURITY_ACTUAL" domainObjectName="DealSecurityActual">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="DEAL_SECURITY_ACTUAL_ID"
+				sqlStatement="SELECT SEQ_DEAL_SECURITY_ACTUAL.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table tableName="DEAL_SECURITY_ACCRUE" domainObjectName="DealSecurityAccrue">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="DEAL_SECURITY_ACCRUE_ID"
+				sqlStatement="SELECT SEQ_DEAL_SECURITY_ACCRUE.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table schema="comstplc" tableName="SECURITY" domainObjectName="Security">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="comstplc" tableName="SECURITY_PYMN_SCHD" domainObjectName="SecurityPaymentSchedule">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="comstplc" tableName="SECURITY_COUPON_SCHD" domainObjectName="SecurityCouponSchedule">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		 <table tableName="SYS_BRANCH" domainObjectName="Branch">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="ID"
+				sqlStatement="SELECT SEQ_SYS_BRANCH.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table tableName="SYS_USER" domainObjectName="User">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="ID"
+				sqlStatement="SELECT SEQ_SYS_USER.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table tableName="SYS_ROLE" domainObjectName="Role">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="ID"
+				sqlStatement="SELECT SEQ_SYS_ROLE.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table tableName="SYS_PRIVILEGE" domainObjectName="Privilege">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="ID"
+				sqlStatement="SELECT SEQ_SYS_PRIVILEGE.NEXTVAL FROM DUAL" />
+		</table>
+		
+		<table tableName="SYS_USER_ROLE" domainObjectName="UserRole">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table tableName="SYS_ROLE_PRIVILEGE" domainObjectName="RolePrivilege">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		 -->
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_0.dtd">
+
+<Configure id="server" class="org.eclipse.jetty.server.Server">
+
+    <Get name="ThreadPool">
+        <Set name="minThreads" type="int">10</Set>
+        <Set name="maxThreads" type="int">200</Set>
+        <Set name="idleTimeout" type="int">60000</Set>
+        <Set name="detailedDump">false</Set>
+    </Get>
+    
+    <Call name="addBean">
+        <Arg>
+            <New class="org.eclipse.jetty.util.thread.ScheduledExecutorScheduler"/>
+        </Arg>
+    </Call>
+    
+    <New id="httpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
+        <Set name="secureScheme">https</Set>
+        <Set name="securePort">8443</Set>
+        <Set name="outputBufferSize">32768</Set>
+        <Set name="outputAggregationSize">8192</Set>
+        <Set name="requestHeaderSize">8192</Set>
+        <Set name="responseHeaderSize">8192</Set>
+        <Set name="sendServerVersion">true</Set>
+        <Set name="sendDateHeader">false</Set>
+        <Set name="headerCacheSize">512</Set>
+        <Set name="delayDispatchUntilContent">false</Set>
+    </New>
+
+	<Call name="addConnector">
+		<Arg>
+			<New class="org.eclipse.jetty.server.ServerConnector">
+				<Arg name="jettyServer"><Ref refid="server" /></Arg>
+				<Set name="host">0.0.0.0</Set>
+				<Set name="port">9004</Set>
+				<Set name="idleTimeout">30000</Set>
+				<Set name="reuseAddress">false</Set>
+			</New>
+		</Arg>
+	</Call>
+
+	<Set name="handler">
+		<New id="Handlers" class="org.eclipse.jetty.server.handler.HandlerCollection">
+			<Set name="handlers">
+				<Array type="org.eclipse.jetty.server.Handler">
+					<Item>
+						<New class="org.eclipse.jetty.webapp.WebAppContext">
+							<Set name="contextPath">/</Set>
+							<Set name="resourceBase">
+								./src/main/webapp
+							</Set>
+							<Set name="parentLoaderPriority">true</Set>
+							<Set name="defaultsDescriptor">jetty/webdefault-windows.xml</Set>
+						</New>
+					</Item>
+					<Item>
+						<New class="org.eclipse.jetty.servlet.ServletContextHandler">
+							<Set name="contextPath">/</Set>
+						</New>
+					</Item>
+					<Item>
+						<New class="org.eclipse.jetty.server.handler.DefaultHandler" />
+					</Item>
+					<Item>
+						<New id="requestLogHandler" class="org.eclipse.jetty.server.handler.RequestLogHandler" />
+					</Item>
+				</Array>
+			</Set>
+		</New>
+	</Set>
+
+	<Ref id="requestLogHandler">
+		<Set name="requestLog">
+			<New id="requestLogImpl" class="ch.qos.logback.access.jetty.RequestLogImpl">
+				<Set name="resource">/logback-access.xml</Set>
+			</New>
+		</Set>
+	</Ref>
+
+	<Set name="stopAtShutdown">true</Set>
+	<Set name="dumpAfterStart">false</Set>
+	<Set name="dumpBeforeStop">false</Set>
+
+</Configure>
